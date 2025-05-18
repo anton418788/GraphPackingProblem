@@ -5,6 +5,7 @@ import java.util.*;
 public class Graph {
     private int numVertices;
     private Map<Integer, Set<Integer>> adjacencyList;
+    private int editingEdges = 0;
 
     public Graph(int numVertices) {
         this.numVertices = numVertices;
@@ -47,14 +48,26 @@ public class Graph {
 
     public void removeIncidentEdges(Set<Integer> vertices) {
         for (int v : vertices) {
+            // Проходим по всем соседям вершины v
             for (int neighbor : new HashSet<>(adjacencyList.get(v))) {
+                // Если сосед НЕ входит в удаляемый подграф — это инцидентное ребро
+                if (!vertices.contains(neighbor)) {
+                    this.setEditingEdges(1);
+                }
                 removeEdge(v, neighbor);
+                // Иначе — это ребро внутри подграфа, его не считаем
             }
         }
     }
 
     public Set<Integer> getNeighbors(int v) {
         return adjacencyList.get(v);
+    }
+    public void setEditingEdges(int editing_value) {
+        this.editingEdges = this.editingEdges + editing_value;
+    }
+    public int getEditingEdges() {
+        return editingEdges;
     }
 
     public Graph copy() {

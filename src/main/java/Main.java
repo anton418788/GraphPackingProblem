@@ -1,4 +1,4 @@
-package Graph;
+import Graph.*;
 
 import java.util.*;
 
@@ -17,6 +17,11 @@ public class Main {
 
     public static void main(String[] args) {
         Random random = new Random(12345);
+        Graph randomGraph2 = Graph.generateErdosRenyiGraph(20, EDGE_PROBABILITY, random);
+        PackingAlgorithms algorithms4 = new PackingAlgorithms(randomGraph2);
+        Graph M5 = algorithms4.k4PackingAlgorithm();
+        System.out.println(String.valueOf(countEdges(M5)));
+        System.out.println(String.valueOf(countEdges(randomGraph2) - algorithms4.getEditingEdges()));
 
         for (int size : GRAPH_SIZES) {
             System.out.printf("\n=== Тестирование для графов с %d вершинами ===\n", size);
@@ -27,31 +32,21 @@ public class Main {
             for (int i = 0; i < NUM_TESTS; i++) {
                 // Генерация графа
                 Graph randomGraph = Graph.generateErdosRenyiGraph(size, EDGE_PROBABILITY, random);
-                //System.out.printf("\nГраф #%d:\n%s\n", i+1, randomGraph);
 
-                GraphProcessor processor = new GraphProcessor(randomGraph);
+                // Создаем экземпляр PackingAlgorithms
+                PackingAlgorithms algorithms1 = new PackingAlgorithms(randomGraph);
+                PackingAlgorithms algorithms2 = new PackingAlgorithms(randomGraph);
+                PackingAlgorithms algorithms3 = new PackingAlgorithms(randomGraph);
 
-                // Алгоритм 1
-                Graph M1 = processor.algorithm1();
-                //System.out.println("Результат Алгоритма 1:");
-                //System.out.println(M1);
-                //System.out.printf("Количество ребер: %d\n", countEdges(M1));
+                // Вызываем методы через экземпляр
+                Graph M1 = algorithms1.k4PackingAlgorithm();
+                Graph M2 = algorithms2.q4PackingAlgorithm();
+                Graph M3 = algorithms3.l4PackingAlgorithm();
 
-                // Алгоритм 2
-                Graph M2 = processor.algorithm2();
-                //System.out.println("Результат Алгоритма 2:");
-                //System.out.println(M2);
-                //System.out.printf("Количество ребер: %d\n", countEdges(M2));
 
-                // Алгоритм 3
-                Graph M3 = processor.algorithm3();
-                //System.out.println("Результат Алгоритма 3:");
-                //System.out.println(M3);
-                //System.out.printf("Количество ребер: %d\n", countEdges(M3));
-
-                algo1Results[i] = countEdges(M1);
-                algo2Results[i] = countEdges(M2);
-                algo3Results[i] = countEdges(M3);
+                algo1Results[i] = countEdges(randomGraph) - algorithms1.getEditingEdges();
+                algo2Results[i] = countEdges(randomGraph) - algorithms2.getEditingEdges();
+                algo3Results[i] = countEdges(randomGraph) - algorithms3.getEditingEdges();
             }
 
             // Итоговая статистика
@@ -63,4 +58,3 @@ public class Main {
         }
     }
 }
-
