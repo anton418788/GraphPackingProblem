@@ -4,9 +4,7 @@ import Graph.*;
 import java.util.*;
 
 public class Main {
-    private static final int NUM_TESTS = 100;
-    private static final double EDGE_PROBABILITY = 0.75;
-    private static final int[] GRAPH_SIZES = {10, 20, 30, 40, 50, 60, 70, 80, 90, 100};
+    private static final double EDGE_PROBABILITY = 0.25;
 
 
     public static void main(String[] args) {
@@ -17,7 +15,7 @@ public class Main {
         System.out.println(Graph.countEdges(M6));
         System.out.println(Graph.countEdges(randomGraph2) - algorithms6.getEditingEdges());
 
-        Experiment.startExperiment(100, 0.75, new int[]{10, 20, 30, 40, 50, 60, 70, 80, 90, 100});
+        Experiment.startExperiment(100, 0.25, new int[]{10, 20, 30, 40, 50, 60, 70, 80, 90, 100});
 
 //
     }
