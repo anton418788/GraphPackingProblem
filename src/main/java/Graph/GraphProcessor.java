@@ -80,7 +80,7 @@ public class GraphProcessor {
             }
         }
     }
-    public static void findAndEdit4(Graph GPrime, Graph M) {
+    public static void findAndEditL4(Graph GPrime, Graph M) {
         boolean found = true;
         while (found) {
             found = false;
@@ -109,7 +109,6 @@ public class GraphProcessor {
                                 M.addEdge(v4, v1);
                                 M.addEdge(v1, v3);
                                 M.addEdge(v2, v4);
-                                M.setEditingEdges(6);
 
                                 // Удаляем вершины из GPrime
                                 Set<Integer> toRemove = new HashSet<>(Arrays.asList(v1, v2, v3, v4));
@@ -127,6 +126,7 @@ public class GraphProcessor {
                                 M.addEdge(v4, v1);
                                 M.addEdge(v1, v3);
                                 M.addEdge(v2, v4);
+                                GPrime.setEditingEdges(1);
 
                                 // Удаляем вершины из GPrime
                                 Set<Integer> toRemove = new HashSet<>(Arrays.asList(v1, v2, v3, v4));
