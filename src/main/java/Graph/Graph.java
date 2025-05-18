@@ -69,6 +69,13 @@ public class Graph {
     public int getEditingEdges() {
         return editingEdges;
     }
+    public static int countEdges(Graph graph) {
+        int edgeCount = 0;
+        for (int v : graph.getVertices()) {
+            edgeCount += graph.getNeighbors(v).size();
+        }
+        return edgeCount / 2;
+    }
 
     public Graph copy() {
         Graph newGraph = new Graph(numVertices);
