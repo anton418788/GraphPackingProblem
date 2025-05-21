@@ -16,11 +16,8 @@ public class Graph {
     }
 
     /**
-     * Генерирует случайный граф Эрдёша-Реньи G(n, p)
-     * @param n количество вершин
-     * @param p вероятность существования ребра (0 ≤ p ≤ 1)
-     * @param random объект Random для генерации случайных чисел
-     * @return новый граф G(n, p)
+     * n - количество вершин
+     * p - вероятность существования ребра (0 ≤ p ≤ 1)
      */
     public static Graph generateErdosRenyiGraph(int n, double p, Random random) {
         Graph graph = new Graph(n);

@@ -11,7 +11,8 @@ public class Experiment {
 
 
     public static void startExperiment (int NUM_TESTS, double EDGE_PROBABILITY, int[] GRAPH_SIZES) {
-        Random random = new Random(12345);
+        Random random = new Random(123);
+        System.out.printf("Экспериментальное исследование на случайных графах Эрдёша-Реньи с вероятностью возникновения ребра p = %.2f%n", EDGE_PROBABILITY);
         for (int size : GRAPH_SIZES) {
             System.out.printf("\n=== Тестирование для графов с %d вершинами ===\n", size);
             double[] algo1Results = new double[NUM_TESTS];
